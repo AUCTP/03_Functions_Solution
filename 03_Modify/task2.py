@@ -6,34 +6,51 @@ When the round is finished, your game should ask the user if he/she wants to pla
 
 import random
 
-def guessing_game(name, difficulty):
-    '''
-    Creates and runs a new guessing game. Users have to guess a number between 1 and {difficulty}
-    '''
-    randomNumber = random.randint(1, difficulty)
-    guess = int(input(f"Hi {name}. I selected a secret number between 1 and {difficulty}. Try to guess it:\n>"))
+def play_game(maxNumber):
     score = 1
+    randomNumber = random.randint(1, maxNumber)
+    guess = int(input(f"\U0001F92B\U0001F92B\U0001F92BI selected a secret number between 1 and {maxNumber}. Try to guess it \U0001F9D0\U0001F9D0:\n>"))
 
     while guess != randomNumber:
-        if guess < randomNumber:
-            guess = int(input("Wrong - your number is too small! Guess again.\n>"))
-        elif guess > randomNumber:
-            guess = int(input("Wrong - your number is too big! Guess again.\n>"))
         score += 1
-    print(40*'-')
-    print(f"Good job {name}! You guessed {randomNumber} correctly")
-    print(40*'-')
+        if guess < randomNumber:
+            guess = int(input("Wrong - your number is to small! Guess again.\n>"))
+        elif guess > randomNumber:
+            guess = int(input("Wrong - your number is to big! Guess again.\n>"))
+
+    print(f"\U0001F973\U0001F973Good job! You guessed {randomNumber} correctly. It took your {score} tries.\U0001F973\U0001F973")
 
 
+def set_difficulty():
+    print('Please select the difficulty level.')
+    print('1. Easy (1-10)')
+    print('2. Medium (1-100)')
+    print('3. Hard (1-1000)')
+    print('4. Expert (1-100000)')
+    choice = int(input('>'))
+    if choice == 1:
+        maxNumber = 10
+    elif choice == 2:
+        maxNumber = 100
+    elif choice ==3 :
+        maxNumber = 1000
+    elif choice == 4:
+        maxNumber = 100000
+    else:
+        print('Invalid choice - using default (100)')
+        maxNumber = 100
+    return maxNumber
+
+
+def play_again(name):
+    print(f'Hi {name}. Good luck in the game!')
+    while True:
+        maxNumber = set_difficulty()
+        play_game(maxNumber)
+        playAgain = input('Play again (y/n): ')
+        if playAgain == 'n':
+            break
+
+# MAIN CODE
 userName = input('Username: ')
-print(f'Hi {userName}. Good luck!')
-
-while True:
-    maxNumber = int(input('Select difficulty (enter maximum number): '))
-    guessing_game(name=userName, difficulty=maxNumber)
-    again = input('Do you want to play again (y/n)?: ')
-    if again != 'y':
-        break
-    print(3*'\n')
-
-
+play_again(userName)

@@ -5,33 +5,43 @@ The user is asked to input two numbers. These numbers will be passed as argument
 The user is asked to input 1 to add, 2 to subtract, 3 to multiply and 4 to divide. Output the returned result as part of a sentence.
 '''
 
-def add(n1, n2):
-    total = n1 + n2
-    return total
+def add(x, y):
+    return f'{x} + {y} = {x+y}'
 
-def subtract(n1, n2):
-    total = n1 - n2
-    return total
+def subtract(x,y):
+    return f'{x} - {y} = {x-y}'
 
-def multiply(n1, n2):
-    return n1 * n2
+def multiply(x,y):
+    return f'{x} * {y} = {x*y}'
 
-def divide(n1, n2):
-    return n1/n2
+def divide(x,y):
+    return f'{x} / {y} = {x/y}'
 
-num1 = float(input("Number 1: "))
-num2 = float(input("Number 2: "))
-choice = int(input("1. Add\n2. Subtract\n3. Multiply\n4. Divide\n>"))
+def print_menu():
+    print('1. Addition')
+    print('2. Subtraction')
+    print('3. Multiply')
+    print('4. Divide')
+    print('5. Shutdown')
+    choice = int(input())
+    return choice
 
-if choice == 1:
-    result = add(num1, num2)    
-elif choice == 2:
-    result = subtract(num1, num2)
-elif choice == 3:
-    result = multiply(num1, num2)
-elif choice == 4:
-    result = divide(num1, num2)
-else:
-    print("Invalid input")
+while True:
+    choice = print_menu()
+    num1 = float(input('Number 1: '))
+    num2 = float(input('Number 2: '))
 
-print(f'Result: {result}')
+    if choice == 1:
+        result = add(num1, num2)
+    elif choice == 2:
+        result = subtract(num1, num2)
+    elif choice == 3:
+        result = multiply(num1, num2)
+    elif choice == 4:
+        result = divide(num1, num2)
+    elif choice == 5:
+        break
+    else:
+        result = 'Invalid choice'
+
+    print(result)

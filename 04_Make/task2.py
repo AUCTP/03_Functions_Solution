@@ -19,9 +19,11 @@ result = factorial(num)
 end = time.time()
 print(f'{num}! = {result}. It took {end-start} seconds to calculate')
 
-# Alternative ohne Rekursion
+# Alternative without recursion
 num = int(input("Number: "))
+start = time.time()
 result = 1
 for i in range(1, num + 1):
     result = result * i
-print(f'{num}! = {result}')
+end = time.time()
+print(f'{num}! = {result}. It took {end-start} seconds to calculate')
